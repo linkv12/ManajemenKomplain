@@ -44,6 +44,21 @@ CREATE TABLE `dataLogin` (
 --
 ALTER TABLE `dataLogin`
   ADD PRIMARY KEY (`username`);
+  
+create table `Admin` (
+	`idAdmin` varchar (10) Not null,
+    `nama` varchar(64) not null,
+    `alamat` varchar(256) not null,
+    `noTelp` varchar (13) not null,
+    `username` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+Alter table `Admin`
+	add primary key (`idAdmin`);
+Alter table `Admin`
+	add foreign key (`username`) references `dataLogin`(`username`);
+  
+insert into `admin` values ('123123123','me','telkom','10','admin');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

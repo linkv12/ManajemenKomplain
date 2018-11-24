@@ -3,23 +3,24 @@
  *  LICENSE
  * 
  */
-package View;
+package manajemenkomplain.Login;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
  *
  * @author link
  */
-public class veiwLogin extends javax.swing.JFrame {
+public class viewLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form veiwLogin
      */
-    public veiwLogin() {
+    public viewLogin() {
         initComponents();
     }
 
@@ -37,18 +38,21 @@ public class veiwLogin extends javax.swing.JFrame {
         lblUsername = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
         tfUsername = new javax.swing.JTextField();
-        tfPassword = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         pnlDescription = new javax.swing.JPanel();
         lblDescription = new javax.swing.JLabel();
+        pfPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Manajemen Komplain");
 
         lblHalLogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblHalLogin.setText("Halaman Login");
 
+        lblUsername.setLabelFor(tfUsername);
         lblUsername.setText("Username");
 
+        lblPassword.setLabelFor(pfPassword);
         lblPassword.setText("Password");
 
         btnLogin.setText("Login");
@@ -94,8 +98,8 @@ public class veiwLogin extends javax.swing.JFrame {
                                 .addComponent(lblPassword))
                             .addGap(38, 38, 38)
                             .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tfUsername)
-                                .addComponent(tfPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)))))
+                                .addComponent(tfUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                                .addComponent(pfPassword)))))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
@@ -112,7 +116,7 @@ public class veiwLogin extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPassword)
-                    .addComponent(tfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(btnLogin)
                 .addGap(19, 19, 19))
@@ -155,20 +159,21 @@ public class veiwLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(veiwLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(veiwLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(veiwLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(veiwLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new veiwLogin().setVisible(true);
+                new viewLogin().setVisible(true);
             }
         });
     }
@@ -177,15 +182,24 @@ public class veiwLogin extends javax.swing.JFrame {
     public JButton getBtnLogin() {
         return btnLogin;
     }
-
-    public String getTfPassword() {
-        return tfPassword.getText();
+    
+    public String getPfPassword() {
+        return String.valueOf(pfPassword.getText());
     }
-
+    
     public String getTfUsername() {
         return tfUsername.getText();
     }
+  
+    // Setter
     
+    public void setPfPassword(String text) {
+        this.pfPassword.setText(text);
+    }
+
+    public void setTfUsername(String text) {
+        this.tfUsername.setText(text);
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -194,9 +208,9 @@ public class veiwLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblHalLogin;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUsername;
+    private javax.swing.JPasswordField pfPassword;
     private javax.swing.JPanel pnlDescription;
     private javax.swing.JPanel pnlMain;
-    private javax.swing.JTextField tfPassword;
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
     

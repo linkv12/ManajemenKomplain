@@ -4,7 +4,7 @@
  * 
  */
 
-package Model;
+package manajemenkomplain.Login;
 
 /**
  *
@@ -18,6 +18,11 @@ public class modelLogin {
     public modelLogin() {
     }
 
+    public modelLogin(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    
     public modelLogin(String username, String password, String type) {
         this.username = username;
         this.password = password;

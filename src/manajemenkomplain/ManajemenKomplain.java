@@ -5,6 +5,8 @@
  */
 package manajemenkomplain;
 
+import manajemenkomplain.Login.controllerLogin;
+
 /**
  *
  * @author link
@@ -16,6 +18,7 @@ public class ManajemenKomplain {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        new controllerLogin();
     }
     
 }
