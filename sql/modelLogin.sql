@@ -6,7 +6,7 @@
 -- Generation Time: Nov 18, 2018 at 04:14 AM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
-Use komplain;
+Use tubes;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -42,25 +42,33 @@ CREATE TABLE `dataLogin` (
 --
 -- Indexes for table `mahasiswa`
 --
+
 ALTER TABLE `dataLogin`
   ADD PRIMARY KEY (`username`);
-  
-create table `Admin` (
-	`idAdmin` varchar (10) Not null,
+
+insert into dataLogin values ('admin', 'admin','admin');
+
+
+create table `pengguna` (
+	`id` varchar (10) Not null,
     `nama` varchar(64) not null,
     `alamat` varchar(256) not null,
     `noTelp` varchar (13) not null,
-    `username` varchar(30) NOT NULL
+    `username` varchar(30) NOT NULL,
+    `type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-Alter table `Admin`
-	add primary key (`idAdmin`);
-Alter table `Admin`
+
+Alter table `pengguna`
+	add primary key (`id`);
+Alter table `pengguna`
 	add foreign key (`username`) references `dataLogin`(`username`);
   
-insert into `admin` values ('123123123','me','telkom','10','admin');
+insert into pengguna values ('root','root','super','10','admin','admin');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+

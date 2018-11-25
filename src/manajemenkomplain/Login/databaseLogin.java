@@ -27,7 +27,7 @@ public class databaseLogin {
     
     public void connect(){
         try {
-            String url = "jdbc:mysql://localhost/komplain";
+            String url = "jdbc:mysql://localhost/tubes";
             String user = "root";
             String pass = "system";
             conn = DriverManager.getConnection(url, user, pass);
