@@ -30,7 +30,7 @@ public class KeluhanDatabase {
         try {
             String url = "jdbc:mysql://localhost/tubes";
             String user = "root";
-            String pass = "system";
+            String pass = "";
             conn = DriverManager.getConnection(url, user, pass);
             stmt = conn.createStatement();
         } catch (SQLException ex) {

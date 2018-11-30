@@ -15,9 +15,9 @@ public class User {
     private String namaUser;
     private String password;
     private String alamat;
-    private int noTelp;
+    private String noTelp;
 
-    public User(String idUser, String idLevel, String namaUser, String password, String alamat, int noTelp) {
+    public User(String idUser, String idLevel, String namaUser, String password, String alamat, String noTelp) {
         this.idUser = idUser;
         this.idUser = idLevel;
         this.namaUser = namaUser;
@@ -62,11 +62,11 @@ public class User {
         this.alamat = alamat;
     }
 
-    public int getNoTelp() {
+    public String getNoTelp() {
         return noTelp;
     }
 
-    public void setNoTelp(int noTelp) {
+    public void setNoTelp(String noTelp) {
         this.noTelp = noTelp;
     }
 

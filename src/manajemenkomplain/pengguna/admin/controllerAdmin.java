@@ -28,14 +28,14 @@ import manajemenkomplain.pengguna.UserDatabase;
 public class controllerAdmin extends MouseAdapter implements ActionListener{
 
     private viewAdmin view;
-    private User userLogin;
+    private User userData;
     private UserDatabase udb;
     private KeluhanDatabase kdb;
     private JFrame loginFrame;
     
     public controllerAdmin(User userData,JFrame loginFr) {
-        this.userLogin = userData;
-        //System.out.println(userLogin.getIdUser());
+        this.userData = userData;
+        //System.out.println(userData.getIdUser());
         view = new viewAdmin();
         this.loginFrame = loginFr;
         this.loginFrame.setVisible(false);
@@ -44,7 +44,7 @@ public class controllerAdmin extends MouseAdapter implements ActionListener{
         kdb = new KeluhanDatabase();
         view.addActionListener(this);
         view.addMouseAdapter(this);
-        changeDetail();
+        reset();
         view.setVisible(true);
         //System.out.println("try to load table........");
         loadTable();
@@ -57,9 +57,9 @@ public class controllerAdmin extends MouseAdapter implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source.equals(view.getBtnLogOut())) {
-            logout();
+            btnLogoutActionPerformed();
         } else if (source.equals(view.getBtnSetting())) {
-            changeData(userLogin);
+            btnSettingActionPerformed(userData);
         }
     }
 
@@ -92,17 +92,26 @@ public class controllerAdmin extends MouseAdapter implements ActionListener{
     }
         
     public void changeDetail () {
-        this.view.setLblNama(this.userLogin.getNamaUser());
+        this.view.setLblNama(this.userData.getNamaUser());
         this.view.setLblUserType("Admin");
     }
     
-    public void logout() {
+    public void btnLogoutActionPerformed() {
         this.loginFrame.setVisible(true);
         this.view.dispose();
     }
     
-    public void changeData (User ud) {
+    public void btnSettingActionPerformed (User ud) {
         //this.view.setVisible(false);
-        controllerSettingAccount controllerSettingAccount = new controllerSettingAccount(view,ud);
+        new controllerSettingAccount(view,ud);
+        this.userData = udb.getUser(this.userData.getIdUser());
+        loadTable();
+        changeDetail();
+    }
+    
+    public void reset() {
+        //loadTable();
+        view.setLblNama(this.userData.getNamaUser());
+        changeDetail();
     }
 }

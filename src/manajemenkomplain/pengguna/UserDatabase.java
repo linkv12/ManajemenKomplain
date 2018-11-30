@@ -28,7 +28,7 @@ public class UserDatabase {
         try {
             String url = "jdbc:mysql://localhost/tubes";
             String user = "root";
-            String pass = "system";
+            String pass = "";
             conn = DriverManager.getConnection(url, user, pass);
             stmt = conn.createStatement();
         } catch (SQLException ex) {
@@ -63,7 +63,7 @@ public class UserDatabase {
             rs = stmt.executeQuery(query);
             while (rs.next()){
                 user.add(new User(rs.getString("idUser"), rs.getString("idLevel"), rs.getString("nama"),
-                            rs.getString("password"), rs.getString("alamat"), rs.getInt("noTelp")));
+                            rs.getString("password"), rs.getString("alamat"), rs.getString("noTelp")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDatabase.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,7 +77,7 @@ public class UserDatabase {
     
     public void addUser(User u) {
         connect();
-        String query = "INSERT INTO user VALUES (";
+        String query = "INSERT INTO `user` VALUES (";
         query += "'" + u.getIdUser() + "',";
         query += "'" + u.getIdLevel() + "',";
         query += "'" + u.getNamaUser() + "',";
@@ -128,7 +128,8 @@ public class UserDatabase {
                 x.setIdLevel(rs.getString("idLevel"));
                 x.setNamaUser(rs.getString("nama"));
                 x.setAlamat(rs.getString("alamat"));
-                x.setNoTelp(rs.getInt("noTelp"));
+                x.setNoTelp(rs.getString("noTelp"));
+                disconnect();
                 return (x);
             } else {
                 //System.out.println("invalid");
@@ -145,13 +146,14 @@ public class UserDatabase {
     
     public void updateUser(User u) {
         connect();
-        String query = "UPDATE user SET";
-        query += "'" + u.getIdUser() + "',";
-        query += "'" + u.getIdLevel() + "',";
-        query += "'" + u.getNamaUser() + "',";
-        query += "'" + u.getPassword() + "',";
-        query += "'" + u.getAlamat() + "',";
-        query += "'" + u.getNoTelp() + "'";
+        String query = "UPDATE user SET ";
+        query += "idLevel='" + u.getIdLevel() + "',";
+        query += "nama='" + u.getNamaUser() + "',";
+        System.out.println("in updateUser " + u.getNamaUser());
+        query += "password='" + u.getPassword() + "',";
+        query += "alamat ='" + u.getAlamat() + "',";
+        query += "noTelp ='" + u.getNoTelp() + "'";
+        query += "where idUser='" + u.getIdUser() + "'";
         if (manipulate(query)){
             for (User usr : user) {
                 if (usr.getIdUser().equals(usr.getIdUser())){
@@ -165,5 +167,55 @@ public class UserDatabase {
             }
         }
         disconnect();
+    }
+    
+    
+    public boolean isPasswordCorrect (String idUser,String password) {
+        connect();
+        try {
+            String query = "select * FROM user WHERE idUser='" + idUser + "' and password='"+password+"';";
+            ResultSet x = stmt.executeQuery(query);
+            if (x.next()){
+                disconnect();
+                return true;
+            } else {
+                disconnect();
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDatabase.class.getName()).log(Level.SEVERE, null, ex);
+            disconnect();
+            return false;
+        }
+    }
+
+    public void updatePassword(User u, String pass) {
+       // connect();
+        /*
+        UPDATE `user` SET `password`=[value-4] WHERE `idUser`=[value-1],`idLevel`=[value-2],`nama`=[value-3],`alamat`=[value-5],`noTelp`=[value-6]
+        */
+        /*
+        String query = "UPDATE `user` SET";
+        query += "`password`='" + pass + "' Where ";
+        query += "`idUser`='" + u.getIdUser() + "',";
+        query += "`idLevel`='" + u.getIdLevel() + "',";
+        query += "`nama`='" + u.getNamaUser() + "',";
+        query += "`alamat`='" + u.getAlamat() + "',";
+        query += "`noTelp`='" + u.getNoTelp() + "';";
+       */
+        //System.out.println(u.getPassword());
+        u.setPassword(pass);
+        //System.out.println(u.getPassword());
+        this.updateUser(u);
+       // disconnect();
+    }
+    
+    public User getUser(ArrayList<User> ArrayListusr, String idUser, String idLevel ) {
+        for (User u : ArrayListusr) {
+            if (u.getIdUser().equalsIgnoreCase(idUser) && u.getIdLevel().equalsIgnoreCase(idLevel)) {
+                return u;
+            }
+        }
+        return null;
     }
 }

@@ -5,6 +5,10 @@
  */
 package manajemenkomplain.pengguna.Setting.changePassword;
 
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author link
@@ -153,4 +157,51 @@ public class viewChangePassword extends javax.swing.JFrame {
     private javax.swing.JPasswordField pfOldPassword;
     private javax.swing.JPasswordField pfReEnterPassword;
     // End of variables declaration//GEN-END:variables
+
+    /// Getter
+    
+    public JButton getBtnBack() {
+        return btnBack;
+    }
+
+    public JButton getBtnChangePassword() {
+        return btnChangePassword;
+    }
+
+    public String getPfNewPassword() {
+        return String.valueOf(pfNewPassword.getPassword());
+    }
+
+    public String getPfOldPassword() {
+        return String.valueOf(pfOldPassword.getPassword());
+    }
+
+    public String getPfReEnterPassword() {
+        return String.valueOf(this.pfReEnterPassword.getPassword());
+    }
+
+    /// Setter
+
+    public void setPfNewPassword(String t) {
+        this.pfNewPassword.setText(t);
+    }
+
+    public void setPfOldPassword(String t) {
+        this.pfOldPassword.setText(t);
+    }
+
+    public void setPfReEnterPassword(String t) {
+        this.pfReEnterPassword.setText(t);
+    }
+    
+    /// Add actionlistener
+    public void addActionListener (ActionListener x) {
+        this.btnBack.addActionListener(x);
+        this.btnChangePassword.addActionListener(x);
+    }
+
+    
+    public void showMessage(String message, String title, int type){
+        JOptionPane.showMessageDialog(null, message, title, type);
+    }
 }

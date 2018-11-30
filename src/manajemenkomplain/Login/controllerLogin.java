@@ -48,12 +48,11 @@ public class controllerLogin implements ActionListener{
         login = db.checkLogin(login);
         if (login != null) {
             //view.showMessage("Login Berhasil", "Login", 1);
-    
+            emptyTf();
             new controllerAdmin (new UserDatabase().getUser(login.getIdUser()),view);
             //System.out.println("WORK");
         } else {
-            view.setTfUsername("");
-            view.setPfPassword("");
+            emptyTf();
             view.showMessage("Invalid username / password", "Login Gagal", 0);
         }
     }
@@ -64,13 +63,17 @@ public class controllerLogin implements ActionListener{
         login = db.checkLogin(login);
         if (login != null) {
             //view.showMessage("Login Berhasil", "Login", 1);
-            
+            emptyTf();
             new controllerAdmin (new UserDatabase().getUser(login.getIdUser()),view);
             //System.out.println("WORK");
         } else {
-            view.setTfUsername("");
-            view.setPfPassword("");
+            emptyTf();
             view.showMessage("Invalid username / password", "Login Gagal", 0);
         }
+    }
+    
+    private void emptyTf() {
+            view.setTfUsername("");
+            view.setPfPassword("");
     }
 }

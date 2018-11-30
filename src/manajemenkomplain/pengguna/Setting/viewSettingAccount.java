@@ -8,6 +8,7 @@ package manajemenkomplain.pengguna.Setting;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -263,5 +264,10 @@ public class viewSettingAccount extends javax.swing.JFrame {
         this.btnBack.addActionListener(x);
         this.btnChangePassword.addActionListener(x);
         this.btnChangeUserData.addActionListener(x);
+    }
+    
+    ////
+    public void showMessage(String message, String title, int type){
+        JOptionPane.showMessageDialog(null, message, title, type);
     }
 }
