@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import manajemenkomplain.keluhan.Keluhan;
 import manajemenkomplain.keluhan.KeluhanDatabase;
+import manajemenkomplain.keluhan.progress.ProgresDatabase;
+import manajemenkomplain.keluhan.suratTugas.SuratTugasDatabase;
 
 /**
  *
@@ -21,11 +23,15 @@ public class controllerDetailKeluhan implements ActionListener{
     private Keluhan kel;
     private viewDetailKeluhan view;
     private KeluhanDatabase kdb;
+    private ProgresDatabase pdb;
+    private SuratTugasDatabase sdb;
     private JFrame viewStr;
     
     public controllerDetailKeluhan (Keluhan kel,JFrame viewStr) {
         this.kel = kel;
         kdb = new KeluhanDatabase();
+        pdb = new ProgresDatabase();
+        sdb = new SuratTugasDatabase();
         view = new viewDetailKeluhan();
         view.setLblIdKeluhan(kel.getIdKeluhan());
         view.setLblIdUser(kel.getIdUser());
@@ -58,7 +64,11 @@ public class controllerDetailKeluhan implements ActionListener{
     }
 
     private void btnDeleteActioPerformed() {
+        this.sdb.delSuratTugas(kel.getIdKeluhan());
+        this.kdb.delKeluhan(kel.getIdKeluhan());
+        
         this.kdb.delKeluhan(this.kel.getIdKeluhan());
+        
         view.showMessage("Berhasil dihapus", "Status", 1);
         btnBackActionPerformed();
     }

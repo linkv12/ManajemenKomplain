@@ -64,8 +64,8 @@ public class controllerTambahUser implements ActionListener,ItemListener{
         this.view.dispose();
     }
 
-    private void btnCreateActionPerformed() {
-        if (isAllLegal()) {
+private void btnCreateActionPerformed() {
+        if (!isAllLegal()) {
             view.showMessage("Something invalid", "Error", 0);
         } else {
             this.userData = new User();

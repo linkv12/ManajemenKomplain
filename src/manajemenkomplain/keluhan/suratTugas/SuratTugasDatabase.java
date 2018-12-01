@@ -62,7 +62,7 @@ public class SuratTugasDatabase {
             rs = stmt.executeQuery(query);
             this.surattugas = new ArrayList<> ();
             while (rs.next()){
-                surattugas.add(new SuratTugas(rs.getString("isSuraTugas"), rs.getString("idKeluhan")));
+                surattugas.add(new SuratTugas(rs.getString("idSuratTugas"), rs.getString("idKeluhan")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(SuratTugasDatabase.class.getName()).log(Level.SEVERE, null, ex);
@@ -84,6 +84,16 @@ public class SuratTugasDatabase {
         disconnect();
     }
      
+    public SuratTugas getSuratTugas(String idKeluhan) {
+        
+        for (SuratTugas s : this.surattugas) {
+            if (s.getIdKeluhan().equals(idKeluhan)) {
+                return s;
+            }
+        }
+        return null;
+    }
+   
     public boolean cekDuplikatIdSuratTugas(String idSuratTugas){
         boolean cek = false;
         for (SuratTugas st : surattugas) {
@@ -95,12 +105,12 @@ public class SuratTugasDatabase {
         return cek;
     }
     
-    public void delSuratTugas(String idSuratTugas) {
+    public void delSuratTugas(String idKeluhan) {
         connect();
-        String query = "DELETE FROM surattugas WHERE idSuratTugas='" + idSuratTugas + "'";
+        String query = "DELETE FROM surattugas WHERE idKeluhan='" + idKeluhan + "'";
         if (manipulate(query)){
             for (SuratTugas st : surattugas) {
-                if (st.getIdSuratTugas().equals(idSuratTugas)){
+                if (st.getIdKeluhan().equals(idKeluhan)){
                     surattugas.remove(st);
                     break;
                 }
@@ -113,11 +123,12 @@ public class SuratTugasDatabase {
         int max = 0;
         if (!surattugas.isEmpty()) {
             for (SuratTugas kel : surattugas) {
-                if (Integer.valueOf(kel.getIdSuratTugas()) > max) {
-                    max = Integer.valueOf(kel.getIdSuratTugas());
+                if (Integer.valueOf(kel.getIdKeluhan()) > max) {
+                    max = Integer.valueOf(kel.getIdKeluhan());
                 }
             }
             max += 1;
+            System.out.println(max);
             String idSuratTugas = String.valueOf(max);
             while (idSuratTugas.length() < 5) {
                 idSuratTugas = "0" + idSuratTugas;

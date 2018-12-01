@@ -107,7 +107,7 @@ public class ControllerTambahKeluhan implements ActionListener,ItemListener{
                 resetCk();
                 view.setTextDeskrips("");
                 sdb.addSuratTugas(new SuratTugas(sdb.getMaxIdSuratTugas(),keluhan.getIdKeluhan()));
-                pdb.addPogres(new Progres(keluhan.getIdKeluhan(),sdb.get,keluhan.getIdUser(),"menunggu"));
+                pdb.addPogres(new Progres(keluhan.getIdKeluhan(),sdb.getSuratTugas(keluhan.getIdKeluhan()).getIdSuratTugas(),keluhan.getIdUser(),"menunggu"));
                 
                 view.showMessage("Data Berhasil di input", "Status", 1);
                 this.btnBackActionPerformed();
