@@ -76,11 +76,12 @@ public class ProgresDatabase {
     
     public void addPogres(Progres p) {
         connect();
+        //System.out.println(p.getIdKeluhan() + "   =  " + p.getIdSuratTugas() + "   =  "+p.getIdUser() + "  =  " + p.getStatus());
         String query = "INSERT INTO progres VALUES (";
         query += "'" + p.getIdKeluhan() + "',";
         query += "'" + p.getIdSuratTugas() + "',";
         query += "'" + p.getIdUser() + "',";
-        query += "'" + p.getStatus() + "',";
+        query += "'" + p.getStatus() + "'";
         query += ")";
         if (manipulate(query)) progres.add(p);
         disconnect();

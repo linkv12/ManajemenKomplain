@@ -14,6 +14,8 @@ import manajemenkomplain.keluhan.Keluhan;
 import manajemenkomplain.keluhan.KeluhanDatabase;
 import manajemenkomplain.keluhan.progress.Progres;
 import manajemenkomplain.keluhan.progress.ProgresDatabase;
+import manajemenkomplain.keluhan.suratTugas.SuratTugas;
+import manajemenkomplain.keluhan.suratTugas.SuratTugasDatabase;
 import manajemenkomplain.pengguna.User;
 import manajemenkomplain.pengguna.UserDatabase;
 
@@ -33,6 +35,7 @@ public class ControllerTambahKeluhan implements ActionListener,ItemListener{
     private String tempTheme = "";
     private ProgresDatabase pdb;
     private Progres progress;
+    private SuratTugasDatabase sdb;
 
     public ControllerTambahKeluhan(JFrame preview, User userData) {
         this.userData = userData;
@@ -40,6 +43,8 @@ public class ControllerTambahKeluhan implements ActionListener,ItemListener{
         view = new ViewTambahKeluhan();
         udb = new UserDatabase();
         kdb = new KeluhanDatabase();
+        pdb = new ProgresDatabase();
+        sdb = new SuratTugasDatabase();
         this.preview.setVisible(false);
         view.addActionListener(this);
         view.addItemListener(this);
@@ -101,6 +106,9 @@ public class ControllerTambahKeluhan implements ActionListener,ItemListener{
                 init();
                 resetCk();
                 view.setTextDeskrips("");
+                sdb.addSuratTugas(new SuratTugas(sdb.getMaxIdSuratTugas(),keluhan.getIdKeluhan()));
+                pdb.addPogres(new Progres(keluhan.getIdKeluhan(),sdb.get,keluhan.getIdUser(),"menunggu"));
+                
                 view.showMessage("Data Berhasil di input", "Status", 1);
                 this.btnBackActionPerformed();
             }

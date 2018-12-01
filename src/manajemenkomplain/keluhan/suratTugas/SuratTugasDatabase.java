@@ -78,7 +78,7 @@ public class SuratTugasDatabase {
         connect();
         String query = "INSERT INTO surattugas VALUES (";
         query += "'" + st.getIdSuratTugas() + "',";
-        query += "'" + st.getIdKeluhan() + "',";
+        query += "'" + st.getIdKeluhan() + "'";
         query += ")";
         if (manipulate(query)) surattugas.add(st);
         disconnect();

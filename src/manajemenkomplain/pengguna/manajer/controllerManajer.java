@@ -124,10 +124,10 @@ public class controllerManajer extends MouseAdapter implements ActionListener,It
         //view.getTblResult() = new JTable(); 
         //model.setRowCount(0);
         ArrayList<Keluhan> keluhan = kdb.getKeluhan();
-        ArrayList<Progres> progres = pdb.getProgres();
+        //ArrayList<Progres> progres = pdb.getProgres();
         for (Keluhan k : keluhan) {
             Progres p = pdb.getProgres(k.getIdKeluhan());
-            if (p.equals(null)) {
+            if (p == null) {
                 break;
             }
             model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
@@ -151,7 +151,7 @@ public class controllerManajer extends MouseAdapter implements ActionListener,It
             if (this.searchColumn.equals("idUser")){
                 if (k.getIdUser().equals(term)) {
                     Progres p = pdb.getProgres(k.getIdKeluhan());
-            if (p.equals(null)) {
+            if (    p == null) {
                 break;
             }
             model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
@@ -161,7 +161,7 @@ public class controllerManajer extends MouseAdapter implements ActionListener,It
             } else if (this.searchColumn.equals("idKeluhan")) {
                 if (k.getIdKeluhan().equals(term)) {
                     Progres p = pdb.getProgres(k.getIdKeluhan());
-                    if (p.equals(null)) {
+                    if (p == null) {
                         break;
                     }
                         model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
@@ -172,7 +172,7 @@ public class controllerManajer extends MouseAdapter implements ActionListener,It
             } else if (this.searchColumn.equals("Mendesak")) {
                 if (k.isKeluhanMendesak()) {
                    Progres p = pdb.getProgres(k.getIdKeluhan());
-            if (p.equals(null)) {
+            if (   p == null) {
                 break;
             }
             model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
