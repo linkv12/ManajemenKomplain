@@ -79,7 +79,7 @@ public class viewTambahUser extends javax.swing.JFrame {
 
         lblNoTelp.setText("No Telp");
 
-        cbIdLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User", "Teknisi", "Manager" }));
+        cbIdLevel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "User", "Manager" }));
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 

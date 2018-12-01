@@ -32,13 +32,14 @@ import manajemenkomplain.pengguna.tambahUser.controllerTambahUser;
  *
  * @author link_v12
  */
-public class controllerManajer extends MouseAdapter implements ActionListener{
+public class controllerManajer extends MouseAdapter implements ActionListener,ItemListener{
 
     private viewManajer view;
     private User userData;
     private UserDatabase udb;
     private KeluhanDatabase kdb;
     private JFrame loginFrame;
+    private String searchColumn = "";
     
     public controllerManajer(User userData,JFrame loginFr) {
         this.userData = userData;
@@ -52,6 +53,7 @@ public class controllerManajer extends MouseAdapter implements ActionListener{
         kdb = new KeluhanDatabase();
         view.addActionListener(this);
         view.addMouseAdapter(this);
+        view.addItemListener(this);
         reset();
         this.loadTable();
         view.setVisible(true);
@@ -60,6 +62,18 @@ public class controllerManajer extends MouseAdapter implements ActionListener{
         //System.out.println("done load table........");
     }
 
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        Object source = e.getSource();
+        if (source.equals(view.getCbCategory())) {
+            cbCategoryItemSelected();
+        }
+    }
+
+    private void cbCategoryItemSelected() {
+        this.searchColumn = String.valueOf(view.getCbCategory().getSelectedItem());
+        System.out.println(String.valueOf(view.getCbCategory().getSelectedItem()));
+    }
 
     
     
@@ -78,6 +92,10 @@ public class controllerManajer extends MouseAdapter implements ActionListener{
             //reset();
         } else if (source.equals(view.getBtnViewUser())) {
             btnViewUserActionPerformed();
+        } else if(source.equals(view.getBtnTambahKeluhan())) {
+            btnTambahKeluhanActionPerformed();
+        } else if (source.equals(view.getBtnCari())) {
+            btnCariActionPerformed();
         }
         //System.out.println("IT run after win closed");
         //reset();
@@ -105,7 +123,40 @@ public class controllerManajer extends MouseAdapter implements ActionListener{
         view.setTblResult(model);
     }
     
+    public void loadTable(String term){
+        //System.out.println("it runn");
+        DefaultTableModel model = new DefaultTableModel(new String[]{"idKeluhan", "idUser",
+                                "temaKeluhan", "deskripsi","keluhanMendesak"}, 0);
+        //view.getTblResult() = new JTable(); 
+        //model.setRowCount(0);
+        System.out.println(term);
+        ArrayList<Keluhan> keluhan = kdb.getKeluhan();
+        for (Keluhan k : keluhan) {
+            //idKeluhan, idUser, Mendesak
+            System.out.println("k is mendesak "+k.isKeluhanMendesak());
+            if (this.searchColumn.equals("idUser")){
+                if (k.getIdUser().equals(term)) {
+                    model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
+                            k.getTemaKeluhan(), k.getDeskripsi(), k.isKeluhanMendesak()});
+                }
+            } else if (this.searchColumn.equals("idKeluhan")) {
+                if (k.getIdKeluhan().equals(term)) {
+                    model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
+                            k.getTemaKeluhan(), k.getDeskripsi(), k.isKeluhanMendesak()});
+                }
+                
+            } else if (this.searchColumn.equals("Mendesak")) {
+                if (k.isKeluhanMendesak()) {
+                    model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
+                            k.getTemaKeluhan(), k.getDeskripsi(), k.isKeluhanMendesak()});
+                }
+                
+            }
+        }
+        view.setTblResult(model);
+    }   
     
+    @Override
     public void mousePressed(MouseEvent me){
         Object source = me.getSource();
         if (source.equals(view.getTblResult())){
@@ -167,5 +218,16 @@ public class controllerManajer extends MouseAdapter implements ActionListener{
 
     private void btnTambahUserActionPerformed() {
         new controllerTambahUser(view);
+    }
+
+    private void btnCariActionPerformed() {
+        if (this.searchColumn.equals("")) {
+            view.showMessage("Invalid column", "error", 0);
+        } else if (view.getTfSearchFilter().equals("")) {
+            view.showMessage("invalid search term", "error", 0);
+        } else {
+            this.loadTable(view.getTfSearchFilter());
+            //this.btnRefreshActionPerformed();
+        }
     }
 }

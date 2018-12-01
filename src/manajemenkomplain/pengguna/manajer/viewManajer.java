@@ -7,6 +7,7 @@ package manajemenkomplain.pengguna.manajer;
 
 import manajemenkomplain.pengguna.admin.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -42,9 +43,9 @@ public class viewManajer extends javax.swing.JFrame {
         lblHalamanKeluhan = new javax.swing.JLabel();
         lblUserType = new javax.swing.JLabel();
         pnlOption = new javax.swing.JPanel();
+        btnTambahKeluhan = new javax.swing.JButton();
         btnViewUser = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
-        btnEditStatus = new javax.swing.JButton();
         btnSetting = new javax.swing.JButton();
         btnLogOut = new javax.swing.JButton();
         lblNama = new javax.swing.JLabel();
@@ -63,11 +64,11 @@ public class viewManajer extends javax.swing.JFrame {
 
         lblUserType.setText("[User Type]");
 
+        btnTambahKeluhan.setText("Tambah Keluhan");
+
         btnViewUser.setText("View User");
 
         btnRefresh.setText("Refresh");
-
-        btnEditStatus.setText("Edit Status");
 
         javax.swing.GroupLayout pnlOptionLayout = new javax.swing.GroupLayout(pnlOption);
         pnlOption.setLayout(pnlOptionLayout);
@@ -76,24 +77,27 @@ public class viewManajer extends javax.swing.JFrame {
             .addGroup(pnlOptionLayout.createSequentialGroup()
                 .addGroup(pnlOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlOptionLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(btnRefresh)
+                        .addGroup(pnlOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlOptionLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnTambahKeluhan))
+                            .addGroup(pnlOptionLayout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(btnRefresh)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlOptionLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pnlOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEditStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnViewUser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnViewUser, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnlOptionLayout.setVerticalGroup(
             pnlOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOptionLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addContainerGap(183, Short.MAX_VALUE)
+                .addComponent(btnTambahKeluhan)
+                .addGap(18, 18, 18)
                 .addComponent(btnViewUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnEditStatus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
+                .addGap(183, 183, 183)
                 .addComponent(btnRefresh)
                 .addContainerGap())
         );
@@ -143,7 +147,7 @@ public class viewManajer extends javax.swing.JFrame {
             }
         });
 
-        cbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Item 2", "Item 3", "Item 4" }));
+        cbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "idKeluhan", "idUser", "Mendesak" }));
 
         btnCari.setText("Cari");
 
@@ -188,7 +192,7 @@ public class viewManajer extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(pnlOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblHalamanKeluhan, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(lblHalamanKeluhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblUserType, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -270,10 +274,6 @@ public class viewManajer extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -285,10 +285,10 @@ public class viewManajer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCari;
-    private javax.swing.JButton btnEditStatus;
     private javax.swing.JButton btnLogOut;
     private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSetting;
+    private javax.swing.JButton btnTambahKeluhan;
     private javax.swing.JButton btnViewUser;
     private javax.swing.JComboBox<String> cbCategory;
     private javax.swing.JScrollPane jScrollPane1;
@@ -320,6 +320,12 @@ public class viewManajer extends javax.swing.JFrame {
     public JButton getBtnSetting() {
         return btnSetting;
     }
+
+    public JButton getBtnTambahKeluhan() {
+        return btnTambahKeluhan;
+    }
+
+
 
     public JButton getBtnViewUser() {
         return btnViewUser;
@@ -369,13 +375,19 @@ public class viewManajer extends javax.swing.JFrame {
         this.btnCari.addActionListener(x);
         this.btnLogOut.addActionListener(x);
         this.btnSetting.addActionListener(x);
+        this.btnTambahKeluhan.addActionListener(x);
+        //this.btnTambahUser.addActionListener(x);
         this.btnViewUser.addActionListener(x);
-        this.cbCategory.addActionListener(x);
+        //this.cbCategory.addActionListener(x);
         this.btnRefresh.addActionListener(x);
     }
     
     public void addMouseAdapter (MouseAdapter x) {
         this.tblResult.addMouseListener(x);
+    }
+    
+    public void addItemListener(ItemListener x) {
+        this.cbCategory.addItemListener(x);
     }
     
     public void showMessage(String message, String title, int type){
