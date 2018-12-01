@@ -78,7 +78,7 @@ public class ViewTambahKeluhan extends javax.swing.JFrame {
 
         btnBack.setText("Back");
 
-        cbTemaKeluhan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kabel Putus", "Bandwidh Down", "Internet Mati", "Koneksi Tidak Stabil", " " }));
+        cbTemaKeluhan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kabel Putus", "Bandwidh Down", "Internet Mati", "Koneksi Tidak Stabil" }));
 
         lblKeluhanMendesak.setText("Keluhan Mendesak");
 

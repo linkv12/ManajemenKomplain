@@ -25,6 +25,7 @@ import manajemenkomplain.pengguna.Setting.controllerSettingAccount;
 import manajemenkomplain.pengguna.ShowAllUser.controllerShowAllUser;
 import manajemenkomplain.pengguna.User;
 import manajemenkomplain.pengguna.UserDatabase;
+import manajemenkomplain.pengguna.tambahUser.controllerTambahUser;
 
 /**
  *
@@ -78,6 +79,8 @@ public class controllerAdmin extends MouseAdapter implements ActionListener{
             btnTambahKeluhanActionPerformed();
         } else if (source.equals(view.getBtnViewUser())) {
             btnViewUserActionPerformed();
+        } else if (source.equals(view.getBtnTambahUser())) {
+            btnTambahUserActionPerformed();
         }
         //System.out.println("IT run after win closed");
         //reset();
@@ -163,5 +166,9 @@ public class controllerAdmin extends MouseAdapter implements ActionListener{
 
     private void btnViewUserActionPerformed() {
         new controllerShowAllUser(this.userData, view);
+    }
+
+    private void btnTambahUserActionPerformed() {
+        new controllerTambahUser(view);
     }
 }

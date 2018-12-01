@@ -82,16 +82,24 @@ public class ControllerTambahKeluhan implements ActionListener,ItemListener{
         if (this.tempTheme.isEmpty() || this.view.getTextDeskrips().isEmpty()) {
             view.showMessage("Invalid input", "Error", 0);
         } else {
-            keluhan = new Keluhan();
-            this.keluhan.setIdKeluhan(view.getjLabelIdKeluhan());
-            this.keluhan.setIdUser(view.getjLabelIdUser());
-            this.keluhan.setKeluhanMendesak(isMendesak);
-            this.keluhan.setDeskripsi(view.getTextDeskrips());
-            this.keluhan.setTemaKeluhan(tempTheme);
-            kdb.addKeluhan(keluhan);
-            init();
-            resetCk();
-            view.setTextDeskrips("");
+            if (isDescriptionNOTValid(this.view.getTextDeskrips()) 
+                    && this.view.getTextDeskrips().length() > 256  ) {
+                view.setTextDeskrips("");
+                view.showMessage("Invalid Description", "Error", 0);
+            } else {
+                keluhan = new Keluhan();
+                this.keluhan.setIdKeluhan(view.getjLabelIdKeluhan());
+                this.keluhan.setIdUser(view.getjLabelIdUser());
+                this.keluhan.setKeluhanMendesak(isMendesak);
+                this.keluhan.setDeskripsi(view.getTextDeskrips());
+                this.keluhan.setTemaKeluhan(tempTheme);
+                kdb.addKeluhan(keluhan);
+                init();
+                resetCk();
+                view.setTextDeskrips("");
+                view.showMessage("Data Berhasil di input", "Status", 1);
+                this.btnBackActionPerformed();
+            }
         }
     }
     
@@ -102,6 +110,11 @@ public class ControllerTambahKeluhan implements ActionListener,ItemListener{
     
     private void resetCk() {
         view.setCkMendesak(false);
+    }
+
+    private boolean isDescriptionNOTValid(String t) {
+        //System.out.println((t.contains("'") || t.contains("`")));
+        return (t.contains("'") || t.contains("`"));
     }
 
 }

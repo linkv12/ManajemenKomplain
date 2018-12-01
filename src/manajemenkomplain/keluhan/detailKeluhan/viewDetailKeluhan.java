@@ -68,6 +68,7 @@ public class viewDetailKeluhan extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
 
+        taDeskripsi.setEditable(false);
         taDeskripsi.setColumns(20);
         taDeskripsi.setRows(5);
         jScrollPane1.setViewportView(taDeskripsi);

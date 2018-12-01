@@ -88,11 +88,13 @@ public class controllerSettingAccount implements ActionListener{
     }
 
     private void btnChangeUserData() {
-        if (view.getTfNama().isEmpty() || 
-           view.getTfAlamat().isEmpty() || view.getTfNoTelp().isEmpty()) {
+        if (!isTfLegal()) {
            view.showMessage("Invalid data", "Error", 0);
            this.setData(userData);
-        } else {
+        } else if (isTfLegal() && isUserLegal(new User(this.userData.getIdUser()
+            ,this.userData.getIdLevel()
+            ,view.getTfNama(), this.userData.getPassword()
+            ,view.getTfAlamat(),view.getTfNoTelp()))){
             //System.out.println(view.getTfNama());
             User newData = new User(this.userData.getIdUser(),this.userData.getIdLevel()
                         ,view.getTfNama(),this.userData.getPassword(),view.getTfAlamat()
@@ -117,5 +119,18 @@ public class controllerSettingAccount implements ActionListener{
         this.setData(userData);
     }
     
+    public boolean isUserLegal (User u) {
+        return (u.getIdUser().length() <=6 
+                && u.getIdLevel().length() <= 6
+                && u.getPassword().length() <= 12
+                && u.getNamaUser().length() <= 6
+                && u.getAlamat().length() <= 256
+                && u.getNoTelp().length() <= 12);
+    }
     
+    public boolean isTfLegal () {
+        return ((view.getTfNama().length() <= 20 && !view.getTfAlamat().equals(""))
+              && (view.getTfNoTelp().length() <= 12 && !view.getTfNoTelp().equals(""))
+              && (view.getTfAlamat().length() <= 256 && !view.getTfAlamat().equals("")));
+    }
 }

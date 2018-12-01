@@ -58,15 +58,21 @@ public class controllerChangePassword implements ActionListener{
             reset();
             view.showMessage("Invalid Password", "Error", 0);
         } else if (udb.isPasswordCorrect(this.user.getIdUser(), this.user.getPassword())) {
-            if (!view.getPfNewPassword().isEmpty() && !view.getPfNewPassword().equals(view.getPfReEnterPassword())) {
-                view.showMessage("new Password not match", "Error", 0);
-            } else if (!view.getPfNewPassword().isEmpty() && view.getPfNewPassword().equals( view.getPfReEnterPassword())) {
-                udb.updatePassword(user, view.getPfNewPassword());
-                this.user = this.udb.getUser(udb.getUser(), this.user.getIdUser(), this.user.getIdLevel());
-                view.showMessage("Data Berhasil Diubah", "Success", 1);
+            if (isPfLegal()) {    
+                if (!view.getPfNewPassword().isEmpty() && !view.getPfNewPassword().equals(view.getPfReEnterPassword())) {
+                    view.showMessage("new Password not match", "Error", 0);
+                } else if (!view.getPfNewPassword().isEmpty() && view.getPfNewPassword().equals( view.getPfReEnterPassword())) {
+                    udb.updatePassword(user, view.getPfNewPassword());
+                    this.user = this.udb.getUser(udb.getUser(), this.user.getIdUser(), this.user.getIdLevel());
+                    view.showMessage("Data Berhasil Diubah", "Success", 1);
+                    btnBackActionPerformed();
                 //this.view.dispose();
+                } else {
+                    view.showMessage("Unexpected error", "Error", 0);
+                }
             } else {
-                view.showMessage("Unexpected error", "Error", 0);
+                view.showMessage("Input is too long", "Error", 0);
+                reset();
             }
         }
     }
@@ -77,4 +83,10 @@ public class controllerChangePassword implements ActionListener{
         this.view.setPfReEnterPassword("");
     }
     
+    
+    private boolean isPfLegal () {
+        return ((view.getPfOldPassword().length() <= 12 && !view.getPfOldPassword().equals(""))
+                && (view.getPfNewPassword().length() <= 12
+                && !view.getPfNewPassword().equals("")));
+    }
 }
