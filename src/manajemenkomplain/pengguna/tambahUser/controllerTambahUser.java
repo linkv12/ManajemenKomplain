@@ -65,7 +65,7 @@ public class controllerTambahUser implements ActionListener,ItemListener{
     }
 
     private void btnCreateActionPerformed() {
-        if (isAllLegal()) {
+        if (!isAllLegal()) {
             view.showMessage("Something invalid", "Error", 0);
         } else {
             this.userData = new User();
@@ -94,6 +94,11 @@ public class controllerTambahUser implements ActionListener,ItemListener{
     
     /// Checking legality
     private boolean isAllLegal () {
+        System.out.println("Password legal : "+isPasswordLegal());
+        System.out.println("Alamat legal : "+isAlamatLegal());
+        System.out.println("idUser Legal  : "+ isIdUserLegal());
+        System.out.println("nama legal : "+isNamaLegal());
+        System.out.println("notelp legal : "+isNoTelpLegal());
         return (isPasswordLegal() && this.isAlamatLegal()
                 && this.isIdUserLegal() && this.isNamaLegal()
                 && this.isNoTelpLegal());

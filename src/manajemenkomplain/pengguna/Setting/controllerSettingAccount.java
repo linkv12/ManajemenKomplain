@@ -110,6 +110,8 @@ public class controllerSettingAccount implements ActionListener{
             //System.out.println("newData noTelp " + newData.getNoTelp());
             udb.updateUser(newData);
             view.showMessage("Data changed succesfully", "Succes", 1);
+        } else {
+            view.showMessage("unexpected", "logic err", 0);
         }
     }
    
