@@ -21,6 +21,9 @@ import manajemenkomplain.keluhan.Keluhan;
 //import manajemenkomplain.Login.viewLogin;
 import manajemenkomplain.keluhan.KeluhanDatabase;
 import manajemenkomplain.keluhan.detailKeluhan.controllerDetailKeluhan;
+import manajemenkomplain.keluhan.progress.Progres;
+import manajemenkomplain.keluhan.progress.ProgresDatabase;
+import manajemenkomplain.keluhan.suratTugas.SuratTugas;
 import manajemenkomplain.pengguana.tambahKeluhan.ControllerTambahKeluhan;
 import manajemenkomplain.pengguna.Setting.controllerSettingAccount;
 import manajemenkomplain.pengguna.ShowAllUser.controllerShowAllUser;
@@ -40,6 +43,8 @@ public class controllerManajer extends MouseAdapter implements ActionListener,It
     private KeluhanDatabase kdb;
     private JFrame loginFrame;
     private String searchColumn = "";
+    private ProgresDatabase pdb;
+    private SuratTugas sdb;
     
     public controllerManajer(User userData,JFrame loginFr) {
         this.userData = userData;
@@ -51,12 +56,15 @@ public class controllerManajer extends MouseAdapter implements ActionListener,It
         //System.out.println("frame works well");
         udb = new UserDatabase();
         kdb = new KeluhanDatabase();
+        pdb = new ProgresDatabase();
+        
         view.addActionListener(this);
         view.addMouseAdapter(this);
         view.addItemListener(this);
         reset();
-        this.loadTable();
+        
         view.setVisible(true);
+        this.loadTable();
         //System.out.println("try to load table........");
 
         //System.out.println("done load table........");
@@ -112,13 +120,19 @@ public class controllerManajer extends MouseAdapter implements ActionListener,It
     public void loadTable(){
         //System.out.println("it runn");
         DefaultTableModel model = new DefaultTableModel(new String[]{"idKeluhan", "idUser",
-                                "temaKeluhan", "deskripsi","keluhanMendesak"}, 0);
+                                "temaKeluhan", "deskripsi","keluhanMendesak","idSuratTugas","Status"}, 0);
         //view.getTblResult() = new JTable(); 
         //model.setRowCount(0);
         ArrayList<Keluhan> keluhan = kdb.getKeluhan();
+        ArrayList<Progres> progres = pdb.getProgres();
         for (Keluhan k : keluhan) {
+            Progres p = pdb.getProgres(k.getIdKeluhan());
+            if (p.equals(null)) {
+                break;
+            }
             model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
-                            k.getTemaKeluhan(), k.getDeskripsi(), k.isKeluhanMendesak()});
+                            k.getTemaKeluhan(), k.getDeskripsi(), k.isKeluhanMendesak(),p.getIdSuratTugas(),
+                            p.getStatus()});
         }
         view.setTblResult(model);
     }
@@ -136,19 +150,34 @@ public class controllerManajer extends MouseAdapter implements ActionListener,It
             System.out.println("k is mendesak "+k.isKeluhanMendesak());
             if (this.searchColumn.equals("idUser")){
                 if (k.getIdUser().equals(term)) {
-                    model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
-                            k.getTemaKeluhan(), k.getDeskripsi(), k.isKeluhanMendesak()});
+                    Progres p = pdb.getProgres(k.getIdKeluhan());
+            if (p.equals(null)) {
+                break;
+            }
+            model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
+                            k.getTemaKeluhan(), k.getDeskripsi(), k.isKeluhanMendesak(),p.getIdSuratTugas(),
+                            p.getStatus()});
                 }
             } else if (this.searchColumn.equals("idKeluhan")) {
                 if (k.getIdKeluhan().equals(term)) {
-                    model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
-                            k.getTemaKeluhan(), k.getDeskripsi(), k.isKeluhanMendesak()});
+                    Progres p = pdb.getProgres(k.getIdKeluhan());
+                    if (p.equals(null)) {
+                        break;
+                    }
+                        model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
+                            k.getTemaKeluhan(), k.getDeskripsi(), k.isKeluhanMendesak(),p.getIdSuratTugas(),
+                            p.getStatus()});
                 }
                 
             } else if (this.searchColumn.equals("Mendesak")) {
                 if (k.isKeluhanMendesak()) {
-                    model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
-                            k.getTemaKeluhan(), k.getDeskripsi(), k.isKeluhanMendesak()});
+                   Progres p = pdb.getProgres(k.getIdKeluhan());
+            if (p.equals(null)) {
+                break;
+            }
+            model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
+                            k.getTemaKeluhan(), k.getDeskripsi(), k.isKeluhanMendesak(),p.getIdSuratTugas(),
+                            p.getStatus()});
                 }
                 
             }

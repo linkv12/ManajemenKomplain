@@ -12,6 +12,8 @@ import java.awt.event.ItemListener;
 import javax.swing.JFrame;
 import manajemenkomplain.keluhan.Keluhan;
 import manajemenkomplain.keluhan.KeluhanDatabase;
+import manajemenkomplain.keluhan.progress.Progres;
+import manajemenkomplain.keluhan.progress.ProgresDatabase;
 import manajemenkomplain.pengguna.User;
 import manajemenkomplain.pengguna.UserDatabase;
 
@@ -29,6 +31,8 @@ public class ControllerTambahKeluhan implements ActionListener,ItemListener{
     private JFrame preview;
     private boolean isMendesak;
     private String tempTheme = "";
+    private ProgresDatabase pdb;
+    private Progres progress;
 
     public ControllerTambahKeluhan(JFrame preview, User userData) {
         this.userData = userData;
