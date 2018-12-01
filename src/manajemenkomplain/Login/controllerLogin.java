@@ -64,7 +64,13 @@ public class controllerLogin implements ActionListener{
         if (login != null) {
             //view.showMessage("Login Berhasil", "Login", 1);
             emptyTf();
-            new controllerAdmin (new UserDatabase().getUser(login.getIdUser()),view);
+            System.out.println(login.getIdLevel());
+            if (login.getIdLevel().equalsIgnoreCase("adm")) {
+                new controllerAdmin (new UserDatabase().getUser(login.getIdUser()),view);
+            } else {
+                view.showMessage("fuck errie", "errrrrjgakdb asy", 0);
+            }
+            
             //System.out.println("WORK");
         } else {
             emptyTf();

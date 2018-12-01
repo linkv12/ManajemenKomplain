@@ -61,9 +61,15 @@ public class UserDatabase {
         try {
             String query = "SELECT * FROM user";
             rs = stmt.executeQuery(query);
+            this.user = new ArrayList<> ();
             while (rs.next()){
+                //System.out.println("in udb : "+ rs.getString("idUser"));
+                //System.out.println("in user Database " + rs.getString("idLevel"));
+                //System.out.println(rs.getString("idUser")+"--"+rs.getString("idLevel")+"--"+ rs.getString("nama")+"--"+
+                 //           rs.getString("password")+"--"+rs.getString("alamat")+"--"+rs.getString("noTelp"));
                 user.add(new User(rs.getString("idUser"), rs.getString("idLevel"), rs.getString("nama"),
                             rs.getString("password"), rs.getString("alamat"), rs.getString("noTelp")));
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDatabase.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,6 +78,7 @@ public class UserDatabase {
     }
 
     public ArrayList<User> getUser() {
+        //loadUser();
         return user;
     }
     
@@ -149,7 +156,7 @@ public class UserDatabase {
         String query = "UPDATE user SET ";
         query += "idLevel='" + u.getIdLevel() + "',";
         query += "nama='" + u.getNamaUser() + "',";
-        System.out.println("in updateUser " + u.getNamaUser());
+        //System.out.println("in updateUser " + u.getNamaUser());
         query += "password='" + u.getPassword() + "',";
         query += "alamat ='" + u.getAlamat() + "',";
         query += "noTelp ='" + u.getNoTelp() + "'";

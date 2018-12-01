@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -43,6 +44,7 @@ public class viewAdmin extends javax.swing.JFrame {
         btnTambahKeluhan = new javax.swing.JButton();
         btnTambahUser = new javax.swing.JButton();
         btnViewUser = new javax.swing.JButton();
+        btnRefresh = new javax.swing.JButton();
         btnSetting = new javax.swing.JButton();
         btnLogOut = new javax.swing.JButton();
         lblNama = new javax.swing.JLabel();
@@ -67,16 +69,23 @@ public class viewAdmin extends javax.swing.JFrame {
 
         btnViewUser.setText("View User");
 
+        btnRefresh.setText("Refresh");
+
         javax.swing.GroupLayout pnlOptionLayout = new javax.swing.GroupLayout(pnlOption);
         pnlOption.setLayout(pnlOptionLayout);
         pnlOptionLayout.setHorizontalGroup(
             pnlOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOptionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnTambahKeluhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTambahUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnViewUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pnlOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlOptionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnTambahKeluhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTambahUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnViewUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(pnlOptionLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(btnRefresh)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlOptionLayout.setVerticalGroup(
@@ -88,7 +97,9 @@ public class viewAdmin extends javax.swing.JFrame {
                 .addComponent(btnTambahUser)
                 .addGap(18, 18, 18)
                 .addComponent(btnViewUser)
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addGap(143, 143, 143)
+                .addComponent(btnRefresh)
+                .addContainerGap())
         );
 
         btnSetting.setText("Setting");
@@ -273,6 +284,7 @@ public class viewAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCari;
     private javax.swing.JButton btnLogOut;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JButton btnSetting;
     private javax.swing.JButton btnTambahKeluhan;
     private javax.swing.JButton btnTambahUser;
@@ -290,6 +302,11 @@ public class viewAdmin extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 //// Getter
+    
+    public JButton getBtnRefresh() {
+        return btnRefresh;
+    }
+    
     
     public JButton getBtnCari() {
         return btnCari;
@@ -349,6 +366,9 @@ public class viewAdmin extends javax.swing.JFrame {
         this.lblUserType.setText(t);
     }
     
+    public void setTblResult(JTable x) {
+        this.tblResult = x;
+    }
     
     
     
@@ -360,9 +380,14 @@ public class viewAdmin extends javax.swing.JFrame {
         this.btnTambahUser.addActionListener(x);
         this.btnViewUser.addActionListener(x);
         this.cbCategory.addActionListener(x);
+        this.btnRefresh.addActionListener(x);
     }
     
     public void addMouseAdapter (MouseAdapter x) {
         this.tblResult.addMouseListener(x);
+    }
+    
+    public void showMessage(String message, String title, int type){
+        JOptionPane.showMessageDialog(null, message, title, type);
     }
 }

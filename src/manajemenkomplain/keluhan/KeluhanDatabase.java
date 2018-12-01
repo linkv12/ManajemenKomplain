@@ -64,6 +64,7 @@ public class KeluhanDatabase {
             //System.out.println("leadKeluhan");
             String query = "SELECT * FROM keluhan;";
             rs = stmt.executeQuery(query);
+            this.keluhan = new ArrayList<> ();
             while (rs.next()){
                 keluhan.add(new Keluhan(rs.getString("idKeluhan"), rs.getString("idUser"), rs.getString("temaKeluhan"), rs.getString("deskripsi"), rs.getBoolean("keluhanMendesak")));
                 //System.out.println(rs.getString("idKeluhan"));
@@ -87,8 +88,14 @@ public class KeluhanDatabase {
         query += "'" + k.getIdUser() + "',";
         query += "'" + k.getTemaKeluhan() + "',";
         query += "'" + k.getDeskripsi() + "',";
-        query += "'" + k.isKeluhanMendesak() + "',";
+        if (k.isKeluhanMendesak()) {
+            query += "1";
+        } else {
+            query += "0";
+        }
+        
         query += ")";
+        //System.out.println(manipulate(query));
         if (manipulate(query)) keluhan.add(k);
         disconnect();
     }
@@ -118,14 +125,21 @@ public class KeluhanDatabase {
         disconnect();
     }
     
+    /*
+    private String idKeluhan;
+    private String idUser;
+    private String temaKeluhan;
+    private String deskripsi;
+    private boolean keluhanMendesak;
+    */
     public void updateKeluhan(Keluhan k) {
         connect();
-        String query = "UPDATE keluhan SET";
-        query += "'" + k.getIdKeluhan() + "',";
-        query += "'" + k.getIdUser() + "',";
-        query += "'" + k.getTemaKeluhan() + "',";
-        query += "'" + k.getDeskripsi() + "',";
-        query += "'" + k.isKeluhanMendesak() + "',";
+        String query = "UPDATE keluhan SET ";
+        query += "idUser = '" + k.getIdUser() + "',";
+        query += "temaKeluhan = '" + k.getTemaKeluhan() + "',";
+        query += "deskripsi = '" + k.getDeskripsi() + "',";
+        query += "keluhanMendesak = '" + k.isKeluhanMendesak() + "'";
+        query += "where idKeluhan = '" + k.getIdKeluhan() + "'";
         if (manipulate(query)){
             for (Keluhan klh : keluhan) {
                 if (klh.getIdKeluhan().equals(klh.getIdKeluhan())){
@@ -138,5 +152,24 @@ public class KeluhanDatabase {
             }
         }
         disconnect();
+    }
+    
+    public String getMaxIdKeluhan () {
+        int max = 0;
+        if (!keluhan.isEmpty()) {
+            for (Keluhan kel : keluhan) {
+                if (Integer.valueOf(kel.getIdKeluhan()) > max) {
+                    max = Integer.valueOf(kel.getIdKeluhan());
+                }
+            }
+            max += 1;
+            String idKeluhan = String.valueOf(max);
+            while (idKeluhan.length() < 6) {
+                idKeluhan = "0" + idKeluhan;
+            }
+            return idKeluhan;
+        } else {
+            return "000000";
+        }
     }
 }

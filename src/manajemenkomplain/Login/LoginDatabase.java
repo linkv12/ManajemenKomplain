@@ -53,7 +53,7 @@ public class LoginDatabase {
         return cek;
     }
 
-        public LoginModel checkLogin(LoginModel login) {
+    public LoginModel checkLogin(LoginModel login) {
         connect();
         LoginModel fromdb = new LoginModel();
         try {

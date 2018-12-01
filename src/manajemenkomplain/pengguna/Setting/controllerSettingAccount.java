@@ -48,14 +48,15 @@ public class controllerSettingAccount implements ActionListener{
         Object source = e.getSource();
         if (source.equals(view.getBtnBack())) {
             btnBackActionPerformed();
-            updateViewData();
+            //updateViewData();
         } else if (source.equals(view.getBtnChangePassword())) {
             btnChangePasswordActionPerformed(view,userData);
-            updateViewData();
+            //System.out.println("This should not executed");
+            //updateViewData();
         }  else if (source.equals(view.getBtnChangeUserData())) {
             btnChangeUserData();
             //System.out.println("WORK HERE");
-            updateViewData();
+            //updateViewData();
         }
     }
     
@@ -92,26 +93,29 @@ public class controllerSettingAccount implements ActionListener{
            view.showMessage("Invalid data", "Error", 0);
            this.setData(userData);
         } else {
-            System.out.println(view.getTfNama());
+            //System.out.println(view.getTfNama());
             User newData = new User(this.userData.getIdUser(),this.userData.getIdLevel()
                         ,view.getTfNama(),this.userData.getPassword(),view.getTfAlamat()
                         ,view.getTfNoTelp());
             //public User(String idUser, String idLevel, String namaUser, String password, String alamat, String noTelp) 
             newData.setIdUser(this.userData.getIdUser());
             newData.setIdLevel(this.userData.getIdLevel());
-            System.out.println("newData idUser " + newData.getIdUser());
-            System.out.println("newData idLevel " + newData.getIdLevel());
-            System.out.println("newData name " + newData.getNamaUser());
-            System.out.println("newData pass " + newData.getPassword());
-            System.out.println("newData alamat " + newData.getAlamat());
-            System.out.println("newData noTelp " + newData.getNoTelp());
+            //System.out.println("newData idUser " + newData.getIdUser());
+            //System.out.println("newData idLevel " + newData.getIdLevel());
+            //System.out.println("newData name " + newData.getNamaUser());
+            //System.out.println("newData pass " + newData.getPassword());
+            //System.out.println("newData alamat " + newData.getAlamat());
+            //System.out.println("newData noTelp " + newData.getNoTelp());
             udb.updateUser(newData);
+            view.showMessage("Data changed succesfully", "Succes", 1);
         }
     }
    
     public void updateViewData () {
         this.userData = this.udb.getUser(this.userData.getIdUser());
-        System.out.println(this.userData.getNamaUser());
+        //System.out.println(this.userData.getNamaUser());
         this.setData(userData);
     }
+    
+    
 }

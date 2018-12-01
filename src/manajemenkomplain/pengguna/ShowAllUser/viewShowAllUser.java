@@ -5,14 +5,11 @@
  */
 package manajemenkomplain.pengguna.ShowAllUser;
 
-import manajemenkomplain.pengguna.admin.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,46 +35,28 @@ public class viewShowAllUser extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblHalamanKeluhan = new javax.swing.JLabel();
+        lblListUser = new javax.swing.JLabel();
         lblUserType = new javax.swing.JLabel();
-        pnlOption = new javax.swing.JPanel();
-        btnRefresh = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         lblNama = new javax.swing.JLabel();
         pnlTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblResult = new javax.swing.JTable();
-        lblDaftarKeluhan = new javax.swing.JLabel();
+        tblListUser = new javax.swing.JTable();
+        lblDaftarUser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblHalamanKeluhan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblHalamanKeluhan.setText("Halaman Keluhan");
+        lblListUser.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblListUser.setText("List User");
 
         lblUserType.setText("[User Type]");
 
-        btnRefresh.setText("Refresh");
-
-        javax.swing.GroupLayout pnlOptionLayout = new javax.swing.GroupLayout(pnlOption);
-        pnlOption.setLayout(pnlOptionLayout);
-        pnlOptionLayout.setHorizontalGroup(
-            pnlOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOptionLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(btnRefresh)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-        pnlOptionLayout.setVerticalGroup(
-            pnlOptionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlOptionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnRefresh)
-                .addContainerGap())
-        );
+        btnBack.setText("Back");
 
         lblNama.setText("[Akan di isi Nama]");
 
-        tblResult.setAutoCreateRowSorter(true);
-        tblResult.setModel(new javax.swing.table.DefaultTableModel(
+        tblListUser.setAutoCreateRowSorter(true);
+        tblListUser.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -107,7 +86,10 @@ public class viewShowAllUser extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblResult);
+        jScrollPane1.setViewportView(tblListUser);
+
+        lblDaftarUser.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblDaftarUser.setText("Daftar User");
 
         javax.swing.GroupLayout pnlTableLayout = new javax.swing.GroupLayout(pnlTable);
         pnlTable.setLayout(pnlTableLayout);
@@ -115,19 +97,20 @@ public class viewShowAllUser extends javax.swing.JFrame {
             pnlTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTableLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE)
+                .addGroup(pnlTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1009, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDaftarUser))
                 .addContainerGap())
         );
         pnlTableLayout.setVerticalGroup(
             pnlTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTableLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addContainerGap()
+                .addComponent(lblDaftarUser)
+                .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        lblDaftarKeluhan.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblDaftarKeluhan.setText("Daftar Keluhan");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,39 +118,34 @@ public class viewShowAllUser extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(pnlOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblHalamanKeluhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblUserType, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(pnlTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblDaftarKeluhan)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblNama)
-                        .addGap(23, 23, 23))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblListUser, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUserType, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(18, 18, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblNama)
+                            .addComponent(btnBack))
+                        .addGap(23, 23, 23))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(pnlTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblHalamanKeluhan)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblUserType)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(pnlOption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNama)
-                            .addComponent(lblDaftarKeluhan))
-                        .addGap(12, 12, 12)
-                        .addComponent(pnlTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblListUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblUserType))
+                    .addComponent(btnBack))
+                .addGap(7, 7, 7)
+                .addComponent(lblNama)
+                .addGap(12, 12, 12)
+                .addComponent(pnlTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -203,6 +181,10 @@ public class viewShowAllUser extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -213,97 +195,56 @@ public class viewShowAllUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnBack;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblDaftarKeluhan;
-    private javax.swing.JLabel lblHalamanKeluhan;
+    private javax.swing.JLabel lblDaftarUser;
+    private javax.swing.JLabel lblListUser;
     private javax.swing.JLabel lblNama;
     private javax.swing.JLabel lblUserType;
-    private javax.swing.JPanel pnlOption;
     private javax.swing.JPanel pnlTable;
-    private javax.swing.JTable tblResult;
+    private javax.swing.JTable tblListUser;
     // End of variables declaration//GEN-END:variables
 
 //// Getter
-    
-    public JButton getBtnRefresh() {
-        return btnRefresh;
-    }
-    
-    
-    public JButton getBtnCari() {
-        return btnCari;
+
+    public javax.swing.JButton getBtnBack() {
+        return btnBack;
     }
 
-    public JButton getBtnLogOut() {
-        return btnLogOut;
-    }
-
-    public JButton getBtnSetting() {
-        return btnSetting;
-    }
-
-    public JButton getBtnTambahKeluhan() {
-        return btnTambahKeluhan;
-    }
-
-    public JButton getBtnTambahUser() {
-        return btnTambahUser;
-    }
-
-    public JButton getBtnViewUser() {
-        return btnViewUser;
-    }
-
-    public JComboBox<String> getCbCategory() {
-        return cbCategory;
-    }
-
-    public String getTfSearchFilter() {
-        return tfSearchFilter.getText();
-    }
-
-    public JTable getTblResult() {
-        return tblResult;
+    public javax.swing.JTable getTblListUser() {
+        return tblListUser;
     }
     
-    public int getSelectedKeluhan(){
-        return tblResult.getSelectedRow();
+    public int getSelectedUser(){
+        return tblListUser.getSelectedRow();
     }
     
-    //// Setter
+//// Setter
 
-    public void setTfSearchFilter(String t) {
-        this.tfSearchFilter.setText(t);
+    public void setLblNama(String lblNama) {
+        this.lblNama.setText(lblNama);
     }
 
-    public void setTblResult(DefaultTableModel x) {
-        this.tblResult.setModel(x);
+    public void setLblUserType(String lblUserType) {
+        this.lblUserType.setText(lblUserType);
     }
 
-    public void setLblNama(String t) {
-        this.lblNama.setText(t);
+    public void setTblListUser(DefaultTableModel tblListUser) {
+        this.tblListUser.setModel(tblListUser);
     }
 
-    public void setLblUserType(String t) {
-        this.lblUserType.setText(t);
-    }
-    
     
     
     
     public void addActionListener(ActionListener x) {
-        this.btnCari.addActionListener(x);
-        this.btnLogOut.addActionListener(x);
-        this.btnSetting.addActionListener(x);
-        this.btnTambahKeluhan.addActionListener(x);
-        this.btnTambahUser.addActionListener(x);
-        this.btnViewUser.addActionListener(x);
-        this.cbCategory.addActionListener(x);
-        this.btnRefresh.addActionListener(x);
+        this.btnBack.addActionListener(x);
     }
     
     public void addMouseAdapter (MouseAdapter x) {
-        this.tblResult.addMouseListener(x);
+        this.tblListUser.addMouseListener(x);
+    }
+
+    public void showMessage(String message, String title, int type){
+        JOptionPane.showMessageDialog(null, message, title, type);
     }
 }

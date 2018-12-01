@@ -8,16 +8,21 @@ package manajemenkomplain.pengguna.admin;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import manajemenkomplain.keluhan.Keluhan;
 //import manajemenkomplain.Login.viewLogin;
 import manajemenkomplain.keluhan.KeluhanDatabase;
 import manajemenkomplain.keluhan.detailKeluhan.controllerDetailKeluhan;
+import manajemenkomplain.pengguana.tambahKeluhan.ControllerTambahKeluhan;
 import manajemenkomplain.pengguna.Setting.controllerSettingAccount;
+import manajemenkomplain.pengguna.ShowAllUser.controllerShowAllUser;
 import manajemenkomplain.pengguna.User;
 import manajemenkomplain.pengguna.UserDatabase;
 
@@ -35,6 +40,7 @@ public class controllerAdmin extends MouseAdapter implements ActionListener{
     
     public controllerAdmin(User userData,JFrame loginFr) {
         this.userData = userData;
+        System.out.println(this.userData.getIdLevel());
         //System.out.println(userData.getIdUser());
         view = new viewAdmin();
         this.loginFrame = loginFr;
@@ -45,11 +51,13 @@ public class controllerAdmin extends MouseAdapter implements ActionListener{
         view.addActionListener(this);
         view.addMouseAdapter(this);
         reset();
+        this.loadTable();
         view.setVisible(true);
         //System.out.println("try to load table........");
-        loadTable();
+
         //System.out.println("done load table........");
     }
+
 
     
     
@@ -59,13 +67,36 @@ public class controllerAdmin extends MouseAdapter implements ActionListener{
         if (source.equals(view.getBtnLogOut())) {
             btnLogoutActionPerformed();
         } else if (source.equals(view.getBtnSetting())) {
+            view.setVisible(true);
+            //view.stop();
             btnSettingActionPerformed(userData);
+            //reset();
+        } else if (source.equals(view.getBtnRefresh())) {
+            btnRefreshActionPerformed();
+            //reset();
+        } else if (source.equals(view.getBtnTambahKeluhan())) {
+            btnTambahKeluhanActionPerformed();
+        } else if (source.equals(view.getBtnViewUser())) {
+            btnViewUserActionPerformed();
         }
+        //System.out.println("IT run after win closed");
+        //reset();
     }
 
+    public void emptyTable (JTable t) {
+        while (t.getModel().getRowCount()>0)
+          {
+             //t.getModel().e
+          }
+    }
+    
+    
     public void loadTable(){
+        //System.out.println("it runn");
         DefaultTableModel model = new DefaultTableModel(new String[]{"idKeluhan", "idUser",
                                 "temaKeluhan", "deskripsi","keluhanMendesak"}, 0);
+        //view.getTblResult() = new JTable(); 
+        //model.setRowCount(0);
         ArrayList<Keluhan> keluhan = kdb.getKeluhan();
         for (Keluhan k : keluhan) {
             model.addRow(new Object[]{k.getIdKeluhan(), k.getIdUser(),
@@ -73,6 +104,7 @@ public class controllerAdmin extends MouseAdapter implements ActionListener{
         }
         view.setTblResult(model);
     }
+    
     
     public void mousePressed(MouseEvent me){
         Object source = me.getSource();
@@ -104,14 +136,32 @@ public class controllerAdmin extends MouseAdapter implements ActionListener{
     public void btnSettingActionPerformed (User ud) {
         //this.view.setVisible(false);
         new controllerSettingAccount(view,ud);
-        this.userData = udb.getUser(this.userData.getIdUser());
-        loadTable();
-        changeDetail();
+        //this.userData = udb.getUser(this.userData.getIdUser());
+        //System.out.println("Setting clossed");
+    }
+    
+    public void updateUserData() {
+        this.userData = this.udb.getUser(this.userData.getIdUser());
+        //System.out.println("get name : "+ this.userData.getNamaUser());
     }
     
     public void reset() {
-        //loadTable();
-        view.setLblNama(this.userData.getNamaUser());
+        updateUserData();
         changeDetail();
+    }
+
+    private void btnTambahKeluhanActionPerformed() {
+        new ControllerTambahKeluhan(this.view,this.userData);
+    }
+
+    
+    private void btnRefreshActionPerformed() {
+        reset();
+        kdb.loadKeluhan();
+        loadTable();
+    }
+
+    private void btnViewUserActionPerformed() {
+        new controllerShowAllUser(this.userData, view);
     }
 }

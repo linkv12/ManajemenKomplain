@@ -19,7 +19,7 @@ public class User {
 
     public User(String idUser, String idLevel, String namaUser, String password, String alamat, String noTelp) {
         this.idUser = idUser;
-        this.idUser = idLevel;
+        this.idLevel = idLevel;
         this.namaUser = namaUser;
         this.password = password;
         this.alamat = alamat;
